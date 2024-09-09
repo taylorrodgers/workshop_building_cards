@@ -1,0 +1,236 @@
+---
+title: "Learn Bootstrap 5's Style Sheet by Building a Custom Card"
+subtitle: "Advanced Workshop for R Shiny"
+author: "Taylor Rodgers"
+format: 
+  revealjs:
+    theme: [default, custom.scss]
+    logo: free_state_logo.png
+    code-block-height: 650px
+editor: visual
+---
+
+# About the Speaker
+
+##  {.center}
+
+::: columns
+::: {.column width="40%"}
+![](./headshot.jpeg)
+:::
+
+::: {.column width="60%"}
+### Taylor Rodgers
+
+::: incremental
+-   Author of *Data Work: A Jargon-Free Guide to Managing a Successful Data Team*
+
+-   Bachelors in Economics and a Masters in Applied Statistics
+
+-   10 years experience working in data science & analytics
+
+    -   Started using R programming 5 years ago
+
+-   In 2022, I founded Free State Analytics
+:::
+:::
+:::
+
+## {.center}
+
+::: columns
+::: {.column style="width: 40%"}
+![](free_state_logo.png){fig-align="center"}
+:::
+
+::: {.column style="width: 60%"}
+
+::: incremental
+-   We build R Packages, Quarto Websites, and Shiny applications
+
+-   We are a [team]{.underline} of consultants
+
+-   Our clients span industries
+
+-   Operate on a project basis, as well on a retainer or services agreement
+:::
+
+:::
+:::
+
+# Learn How to Build a Card\*
+
+## Learn How to Build a Card\* {.center}
+
+![](final.gif)
+
+# Navigate Bootstrap Documentation
+
+## Navigate Bootstrap Documentation {.center}
+
+![](bootstrap.png)
+
+##  {.center}
+
+
+::: {style="font-size: 1.75em;"}
+The "Standard" Way
+:::
+
+`bslib` has a great function to create a card. It's called `card`.
+
+```{.r code-line-numbers="|1,2,3"}
+card(class = "shadow-sm",
+    style = "min-height: 300px; border-top: solid black;",
+    card_body(
+        uiOutput("card_financials"),
+        br(),
+        div(style = "height: 200px",
+            plotOutput("card_financials_trend")),
+        br(),
+        tableOutput("card_financials_table")
+    )
+)
+```
+
+##  {.center}
+
+::: {style="font-size: 1.75em;"}
+The `div` Tag Way
+:::
+
+We'll use `div` tags to specifically call out the `class` and `style`.
+<br>
+
+```{.r code-line-numbers="|1,2,3"}
+div(class = "card shadow-sm",
+    style = "min-height: 300px; border-top: solid black;",
+    div(class = "card-body",
+        uiOutput("card_financials"),
+        br(),
+        div(style = "height: 200px",
+            plotOutput("card_financials_trend")),
+        br(),
+        tableOutput("card_financials_table")
+    )
+)
+```
+
+## Why Use `div` Tag?
+
+::: incremental
+-   R Shiny produces a web application -- so let's develop it like a website
+
+-   Existing UI functions may not:
+
+    -   Do what you need (ie., hasn't been created yet)
+
+    -   Do what you expect (i.e., not predictable)
+:::
+
+## {.scrollable}
+::: columns
+::: {.column width="50%"}
+#### `div` Tag Way
+![](./comparison_with_tags.png)
+:::
+
+::: {.column width="50%"}
+#### `bslib::card` Way
+![](./comparison_with_bslib.png)
+
+
+:::
+:::
+
+## Output Comparison
+
+<br>
+
+### `div` Tag
+
+```{r, eval = FALSE, echo = TRUE}
+<div class="card shadow-sm" style="min-height: 300px; border-top: solid black;">
+  <div class="card-body">...</div>
+</div>
+```
+
+<br>
+
+### `bslib::card()`
+
+```{r, eval = FALSE, echo = TRUE}
+<div class="card bslib-card bslib-mb-spacing html-fill-item html-fill-container shadow-sm" data-require-bs-caller="card()" data-require-bs-version="5" style="min-height: 300px; border-top: solid black;">
+  <div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto;">...</div>
+</div>
+```
+
+
+## Need to Remove `br()`
+::: columns 
+::: {.column width="25%"}
+![](./comparison_with_tags.png)
+:::
+
+::: {.column width="75%"} 
+<br>
+<br>
+```{.r code-line-numbers="|5,8"}
+card(class = "shadow-sm",
+    style = "min-height: 300px; border-top: solid black;",
+    card_body(
+        uiOutput("card_financials"),
+        br(),
+        div(style = "height: 200px",
+            plotOutput("card_financials_trend")),
+        br(),
+        tableOutput("card_financials_table")
+    )
+)
+```
+
+
+:::
+:::
+
+## Why Use `div` Tag?
+
+-   R Shiny produces a web application -- so let's develop it like a website
+
+-   Existing UI functions may not:
+
+    -   Do what you need (ie., hasn't been created yet)
+
+    -   Do what you expect (i.e., not predictable)
+    
+::: incremental
+    
+-   `div` tag allows direct references to [Bootstrap style sheet](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
+
+    -   You can build [custom](https://www.freestateanalytics.com/data_stories/case_study_vox.html) UI components with confidence and precision
+
+-   Transfer these skills:
+
+    -   Learn HTML & CSS through a language you already know: R
+
+    -   Posit products aren't limited to R anymore
+
+    -   Quarto websites and HTML documents
+
+    -   Build more complex data visualizations with D3.js
+:::
+
+## Why You Should **Not** Use a `div` Tag?
+
+::: incremental
+-   Shiny is an R (or Python) application -- so let's develop it like an R application
+
+-   Other developers might get confused or find it unreadable
+
+-   `bslib` was built so that you did **not** need to review Bootstrap 5 documentation
+
+-   Over-engineering -- we don't need website quality work for a business intelligence report
+
+:::
+
+# Let's Begin!
