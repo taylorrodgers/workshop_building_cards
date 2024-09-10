@@ -1,11 +1,14 @@
 library(shiny)
 library(bslib)
-library(tidyverse)
-library(purrr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
 library(ggthemes)
 
 company_data <-  readRDS("./company_data.rds")
 historical_prices <-  readRDS("./historical_prices.rds")
+
+font_to_link <- font_link("Lato", href = "https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap")
 
 ticker_summary <- function(ticker = NULL, 
                            name_label = NULL, 
@@ -49,7 +52,8 @@ ui <- page(
   title = titlePanel("Custom Card"),
   theme = bs_theme(
     version = 5,
-    base_font = font_google("Lato", wght = "200..900", local = FALSE)),
+    base_font = font_to_link
+  ),
   div(class = "row justify-content-center align-items-center", 
       div(class = "col-11 col-sm-7 col-md-5 col-lg-4 col-xl-3 col-xxl-2",
           selectInput("filter_company", 
@@ -98,11 +102,9 @@ server <- function(input, output, session) {
                y = Close)) +
       geom_line(linewidth = 1.03, color = "#36454F") +
       ggthemes::theme_pander() +
-      theme(text = element_text(
-        family = "Lato"
-      ),
-      axis.title.y = element_blank(),
-      axis.title.x = element_blank())
+      theme(
+        axis.title.y = element_blank(),
+        axis.title.x = element_blank())
     
   }, height = 190)
   

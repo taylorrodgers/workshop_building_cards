@@ -1,9 +1,13 @@
 /*-- scss:defaults --*/
 // fonts
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
-$font-family-sans-serif: 'Lato Light' !default;
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@200;300;400;500;600;700&display=swap');
+$font-family-sans-serif: 'Lato' !default;
 $presentation-font-size-root: 30px !default;
 
 // headings
-$presentation-heading-font: 'Lato Light' !default;
+$presentation-heading-font: 'Lato' !default;
+$presentation-heading-font-weight: 400 !default;
 
+.reveal p, ul, li {
+  font-weight: 300;
+}

@@ -64,12 +64,6 @@ editor: visual
 
 ![](final.gif)
 
-# Navigate Bootstrap Documentation
-
-## Navigate Bootstrap Documentation {.center}
-
-![](bootstrap.png)
-
 ##  {.center}
 
 
@@ -115,6 +109,13 @@ div(class = "card shadow-sm",
     )
 )
 ```
+
+# Navigate Bootstrap Documentation
+
+## Navigate Bootstrap Documentation {.center}
+
+![](bootstrap.png)
+
 
 ## Why Use `div` Tag?
 
@@ -220,17 +221,17 @@ card(class = "shadow-sm",
     -   Build more complex data visualizations with D3.js
 :::
 
-## Why You Should **Not** Use a `div` Tag?
+<!-- ## Why You Should **Not** Use a `div` Tag? -->
 
-::: incremental
--   Shiny is an R (or Python) application -- so let's develop it like an R application
+<!-- ::: incremental -->
+<!-- -   Shiny is an R (or Python) application -- so let's develop it like an R application -->
 
--   Other developers might get confused or find it unreadable
+<!-- -   Other developers might get confused or find it unreadable -->
 
--   `bslib` was built so that you did **not** need to review Bootstrap 5 documentation
+<!-- -   `bslib` was built so that you did **not** need to review Bootstrap 5 documentation -->
 
--   Over-engineering -- we don't need website quality work for a business intelligence report
+<!-- -   Over-engineering -- we don't need website quality work for a business intelligence report -->
 
-:::
+<!-- ::: -->
 
 # Let's Begin!

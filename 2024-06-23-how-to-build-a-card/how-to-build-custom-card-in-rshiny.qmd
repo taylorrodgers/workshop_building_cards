@@ -7,6 +7,7 @@ format: html
 categories: ["R Shiny", "Tutorial"]
 image: "../20240416_building_cards/dashboard_card_preview.gif"
 css: article_cards.css
+margin-footer: "../../subscribe.html"
 ---
 
 ::: {.columns style="display: flex; align-items: center;"}
@@ -62,8 +63,9 @@ You will also need to ensure the following packages are installed.
 ```{r eval = FALSE}
 install.packages("shiny")
 install.packages("bslib")
-install.packages("tidyverse")
-install.packages("purrr")
+install.packages("dplyr")
+install.packages("ggplot2")
+install.packages("tidyr")
 install.packages("ggthemes")
 ```
 
@@ -76,8 +78,9 @@ Copy and paste the code below into new `app.R` file.
 ```{r eval = FALSE}
 library(shiny)
 library(bslib)
-library(tidyverse)
-library(purrr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
 library(ggthemes)
 
 company_data <-  readRDS("./company_data.rds")
@@ -144,7 +147,7 @@ ui <- page(
 
 Regarding our font, let's set it `Lato`. This isn't important for the tutorial and you can skip this step, but it's the font I'll be using and will impact the screenshots you see throughout the tutorial.
 
-To set the font, we'll add another argument to `bs_theme`. We'll set it to `base_font = font_google("Lato", wght = "200..900", local = FALSE)`.
+To set the font, we'll add another argument to `bs_theme`. We'll set it to `base_font = font_link("Lato", href = "https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap")`.
 
 ::: {.columns .column-page}
 ::: {.column style="width: 47.5%;"}
@@ -167,14 +170,18 @@ After changing the font
 :::
 :::
 
-This code isn't too important for this tutorial, but it ensures that we import all the required weights (semi-bold, bold, etc.) for the Lato font.
+Since the `href` parameter is rather long and distracting, we'll create `font_to_link` as an object to pass to the `base_font` param.
 
 ```{r eval = FALSE}
+
+font_to_link = font_link("Lato", href = "https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap")
+
 ui <- page(
   title = titlePanel("Custom Card"),
   theme = bs_theme(
     version = 5, 
-    base_font = font_google("Lato", wght = "200..900", local = FALSE)),
+    base_font = font_to_link
+  ),
   h2("Our Custom Card"),
   selectInput("filter_company", 
               label = strong("Select a company:"), 
@@ -201,7 +208,8 @@ ui <- page(
   title = titlePanel("Custom Card"),
   theme = bs_theme(
     version = 5, 
-    base_font = font_google("Lato", wght = "200..900", local = FALSE)),
+    base_font = font_to_link
+  ),
   h2("Our Custom Card"),
   selectInput("filter_company", 
             label = strong("Select a company:"), 
@@ -246,7 +254,8 @@ ui <- page(
   title = titlePanel("Custom Card"),
   theme = bs_theme(
     version = 5, 
-    base_font = font_google("Lato", wght = "200..900", local = FALSE)),
+    base_font = font_to_link
+    ),
   h2("Our Custom Card"),
   selectInput("filter_company", 
             label = strong("Select a company:"), 
@@ -309,7 +318,8 @@ ui <- page(
   title = titlePanel("Custom Card"),
   theme = bs_theme(
     version = 5,
-    base_font = font_google("Lato", wght = "200..900", local = FALSE)),
+    base_font = font_to_link
+    ),
   div(class = "col-11",
     h2("Our Custom Card"),
     selectInput("filter_company", 
@@ -352,7 +362,8 @@ ui <- page(
   title = titlePanel("Custom Card"),
     theme = bs_theme(
       version = 5,
-      base_font = font_google("Lato", wght = "200..900", local = FALSE)),
+    base_font = font_to_link
+    ),
   div(class = "col-11 col-sm-7",
     h2("Our Custom Card"),
     selectInput("filter_company", 
@@ -403,7 +414,8 @@ ui <- page(
   title = titlePanel("Custom Card"),
     theme = bs_theme(
       version = 5,
-      base_font = font_google("Lato", wght = "200..900", local = FALSE)),
+      base_font = font_to_link
+    ),
   div(class = "col-11 col-sm-7 col-md-5 col-lg-4 col-xl-3 col-xxl-2",
     h2("Our Custom Card"),
     selectInput("filter_company", 
@@ -466,7 +478,8 @@ ui <- page(
   title = titlePanel("Custom Card"),
     theme = bs_theme(
       version = 5,
-      base_font = font_google("Lato", wght = "200..900", local = FALSE)),
+      base_font = font_to_link
+    ),
   div(class = "row justify-content-center align-items-center", 
     div(class = "col-11 col-sm-7 col-md-5 col-lg-4 col-xl-3 col-xxl-2",
       h2("Our Custom Card"),
@@ -521,7 +534,8 @@ ui <- page(
   title = titlePanel("Custom Card"),
   theme = bs_theme(
     version = 5,
-    base_font = font_google("Lato", wght = "200..900", local = FALSE)),
+    base_font = font_to_link
+  ),
   div(class = "row justify-content-center align-items-center", 
     div(class = "col-11 col-sm-7 col-md-5 col-lg-4 col-xl-3 col-xxl-2",
       h2("Our Custom Card"),
@@ -564,7 +578,8 @@ ui <- page(
   title = titlePanel("Custom Card"),
   theme = bs_theme(
     version = 5,
-    base_font = font_google("Lato", wght = "200..900", local = FALSE)),
+    base_font = font_to_link
+  ),
   div(class = "row justify-content-center align-items-center", 
       div(class = "col-11 col-sm-7 col-md-5 col-lg-4 col-xl-3 col-xxl-2",
           h2("Our Custom Card"),
@@ -598,11 +613,9 @@ server <- function(input, output, session) {
                y = Close)) +
       geom_line(linewidth = 1.03, color = "#36454F") +
       ggthemes::theme_pander() +
-      theme(text = element_text(
-        family = "Lato"
-      ),
-      axis.title.y = element_blank(),
-      axis.title.x = element_blank())
+      theme(
+        axis.title.y = element_blank(),
+        axis.title.x = element_blank())
     
   }, height = 190)
   
@@ -664,7 +677,8 @@ ui <- page(
   title = titlePanel("Custom Card"),
   theme = bs_theme(
     version = 5,
-    base_font = font_google("Lato", wght = "200..900", local = FALSE)),
+    base_font = font_to_link
+  ),
   div(class = "row justify-content-center align-items-center", 
       div(class = "col-11 col-sm-7 col-md-5 col-lg-4 col-xl-3 col-xxl-2",
           h2("Our Custom Card"),
@@ -738,7 +752,8 @@ ui <- page(
   title = titlePanel("Custom Card"),
   theme = bs_theme(
     version = 5,
-    base_font = font_google("Lato", wght = "200..900", local = FALSE)),
+    base_font = font_to_link
+  ),
   div(class = "row justify-content-center align-items-center", 
       div(class = "col-11 col-sm-7 col-md-5 col-lg-4 col-xl-3 col-xxl-2",
           h2("Our Custom Card"),
