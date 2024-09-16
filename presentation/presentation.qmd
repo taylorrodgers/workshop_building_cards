@@ -36,7 +36,7 @@ editor: visual
 :::
 :::
 
-## {.center}
+##  {.center}
 
 ::: columns
 ::: {.column style="width: 40%"}
@@ -44,7 +44,6 @@ editor: visual
 :::
 
 ::: {.column style="width: 60%"}
-
 ::: incremental
 -   We build R Packages, Quarto Websites, and Shiny applications
 
@@ -54,7 +53,6 @@ editor: visual
 
 -   Operate on a project basis, as well on a retainer or services agreement
 :::
-
 :::
 :::
 
@@ -66,14 +64,13 @@ editor: visual
 
 ##  {.center}
 
-
 ::: {style="font-size: 1.75em;"}
 The "Standard" Way
 :::
 
 `bslib` has a great function to create a card. It's called `card`.
 
-```{.r code-line-numbers="|1,2,3"}
+``` {.r code-line-numbers="|1,2,3"}
 card(class = "shadow-sm",
     style = "min-height: 300px; border-top: solid black;",
     card_body(
@@ -93,10 +90,9 @@ card(class = "shadow-sm",
 The `div` Tag Way
 :::
 
-We'll use `div` tags to specifically call out the `class` and `style`.
-<br>
+We'll use `div` tags to specifically call out the `class` and `style`. <br>
 
-```{.r code-line-numbers="|1,2,3"}
+``` {.r code-line-numbers="|1,2,3"}
 div(class = "card shadow-sm",
     style = "min-height: 300px; border-top: solid black;",
     div(class = "card-body",
@@ -116,7 +112,6 @@ div(class = "card shadow-sm",
 
 ![](bootstrap.png)
 
-
 ## Why Use `div` Tag?
 
 ::: incremental
@@ -129,18 +124,19 @@ div(class = "card shadow-sm",
     -   Do what you expect (i.e., not predictable)
 :::
 
-## {.scrollable}
+##  {.scrollable}
+
 ::: columns
 ::: {.column width="50%"}
 #### `div` Tag Way
+
 ![](./comparison_with_tags.png)
 :::
 
 ::: {.column width="50%"}
 #### `bslib::card` Way
+
 ![](./comparison_with_bslib.png)
-
-
 :::
 :::
 
@@ -166,17 +162,17 @@ div(class = "card shadow-sm",
 </div>
 ```
 
-
 ## Need to Remove `br()`
-::: columns 
+
+::: columns
 ::: {.column width="25%"}
 ![](./comparison_with_tags.png)
 :::
 
-::: {.column width="75%"} 
-<br>
-<br>
-```{.r code-line-numbers="|5,8"}
+::: {.column width="75%"}
+<br> <br>
+
+``` {.r code-line-numbers="|5,8"}
 card(class = "shadow-sm",
     style = "min-height: 300px; border-top: solid black;",
     card_body(
@@ -189,8 +185,6 @@ card(class = "shadow-sm",
     )
 )
 ```
-
-
 :::
 :::
 
@@ -203,9 +197,8 @@ card(class = "shadow-sm",
     -   Do what you need (ie., hasn't been created yet)
 
     -   Do what you expect (i.e., not predictable)
-    
+
 ::: incremental
-    
 -   `div` tag allows direct references to [Bootstrap style sheet](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
 
     -   You can build [custom](https://www.freestateanalytics.com/data_stories/case_study_vox.html) UI components with confidence and precision
@@ -224,6 +217,7 @@ card(class = "shadow-sm",
 <!-- ## Why You Should **Not** Use a `div` Tag? -->
 
 <!-- ::: incremental -->
+
 <!-- -   Shiny is an R (or Python) application -- so let's develop it like an R application -->
 
 <!-- -   Other developers might get confused or find it unreadable -->
