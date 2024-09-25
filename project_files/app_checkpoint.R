@@ -16,7 +16,7 @@ ui <- page(
     version = 5,
     base_font = font_to_link
   ),
-    div(class = "row justify-content-center align-items-center", 
+    div(class = "row justify-content-center", 
       div(class = "col-11 col-sm-7 col-md-5 col-lg-4 col-xl-3 col-xxl-2",
           h2("Our Custom Card"),
           selectInput("filter_company", 
